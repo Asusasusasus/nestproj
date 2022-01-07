@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Delete, Get } from '@nestjs/common';
-import { CreateMovieDto, DeleteMovieDto, ShowMovieInfoDto } from './movie.dto';
+import { CreateMovieDto, DeleteMovieDto, ShowMovieInfoDto, ActorNameDto } from './movie.dto';
 import { MovieService } from './movie.service';
 
 @Controller('movies')
@@ -25,15 +25,11 @@ export class MovieController {
   show() {
     return this.usersService.sortMoviesByAlphabet();
   }
-  // find where name = body.name
-   /* @Get()
-  delete(@Body() ) {
-    return this.usersService.ShowUsers();
-  } */
+
   // find where actors[n] = req.body
-  /* @Get('/filmsWhereActorExist')
-  showFilmsList(@Body() ) {
-    return this.usersService.showFilmsList();
-  }   */
+  @Get('/filmsWhereActorExist')
+  showFilmsList(@Body() actorDto: ActorNameDto) {
+    return this.usersService.showFilmsWhereActorsPresents(actorDto);
+  }   
 }
 

@@ -16,4 +16,8 @@ export class ShowMovieInfoDto {
     readonly movieName: string;
 }
 
+export class ActorNameDto {
+    readonly actorName: string;
+}
+
 

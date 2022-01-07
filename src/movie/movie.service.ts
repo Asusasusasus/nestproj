@@ -1,7 +1,8 @@
 import { Controller, Post } from '@nestjs/common';
 import { Movie } from './movie.model';
 import { InjectModel } from '@nestjs/sequelize';
-import { CreateMovieDto, DeleteMovieDto, ShowMovieInfoDto } from './movie.dto';
+import { CreateMovieDto, DeleteMovieDto, ShowMovieInfoDto, ActorNameDto } from './movie.dto';
+import { Op } from 'sequelize';
 
 @Controller('movie')
 export class MovieService {
@@ -23,7 +24,7 @@ export class MovieService {
     const {movieName} = dto;   
     const selectedMovieInfo = await this.movieRepository.findAll({ where: { movieName } });
    // selectedMovieInfo.shift(); //!!!!!!!!!!!!!!!!!!!!!!
-    return selectedMovieInfo;
+    return selectedMovieInfo; // almost OK
   }
 
   async sortMoviesByAlphabet () {
@@ -33,19 +34,14 @@ export class MovieService {
     return sortedMovies; //+
   }
 
-   async findMovieByTitle (movieName: string) {
-    const newMovie = await this.movieRepository.findAll({ where: { movieName } });
-    return newMovie[1];
-  }
-
-  /* async showFilmsList (actorName: string) {
+   async showFilmsWhereActorsPresents (dto: ActorNameDto) {
+    const { actorName } = dto // for 1 later will change to many ?
     const newMovie = await this.movieRepository.findAll({ where: {
         actors: {
           [Op.contains]: [actorName],
         } 
       }
-    }); */
-    //return newMovie
-  //} 
+    }); 
+    return newMovie
+ } 
 }
-
