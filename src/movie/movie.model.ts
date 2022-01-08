@@ -30,6 +30,9 @@ export class Movie extends Model<MovieCreationAttrs> {
 
   @Column({
     type:DataType.STRING,
+    validate: {
+      equals: 'DVD' || 'VHS',
+    }
   })
   format: string;
 

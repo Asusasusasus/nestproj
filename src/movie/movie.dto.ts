@@ -8,7 +8,7 @@ export class CreateMovieDto {
 export class DeleteMovieDto {
     readonly movieName: string;
     readonly year?: number;
-    readonly format?: 'VHS' | 'DVD';
+    readonly format?: string;
     readonly actors?: Array<string>
 }
 
@@ -22,7 +22,7 @@ export class ActorNameDto {
 
 export class SortMoviesByValue {
     readonly sortColumn?: string;
-    readonly sortOrder?: 'ASC' | 'DESC';
+    readonly sortOrder?: string;
 }
 
 
