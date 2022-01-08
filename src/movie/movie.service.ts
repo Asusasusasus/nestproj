@@ -1,7 +1,7 @@
 import { Controller, Post } from '@nestjs/common';
 import { Movie } from './movie.model';
 import { InjectModel } from '@nestjs/sequelize';
-import { CreateMovieDto, DeleteMovieDto, ShowMovieInfoDto, ActorNameDto } from './movie.dto';
+import { CreateMovieDto, DeleteMovieDto, ShowMovieInfoDto, ActorNameDto, SortMoviesByValue } from './movie.dto';
 import { Op } from 'sequelize';
 
 @Controller('movie')
@@ -27,10 +27,12 @@ export class MovieService {
     return selectedMovieInfo; // almost OK
   }
 
-  async sortMoviesByAlphabet () {
+  async sortMoviesByValue (dto: SortMoviesByValue) {
+    const column =  dto.sortColumn ||'id';
+    const sortOrder = dto.sortOrder || 'ASC'; // ref
     const sortedMovies = await this.movieRepository.findAll({ 
-        order: ['movieName']
-    });
+        order: [[`${column}`, `${sortOrder}`]]
+      });
     return sortedMovies; //+
   }
 

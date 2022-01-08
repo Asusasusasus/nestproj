@@ -1,5 +1,5 @@
 import { Controller, Post, Body, Delete, Get } from '@nestjs/common';
-import { CreateMovieDto, DeleteMovieDto, ShowMovieInfoDto, ActorNameDto } from './movie.dto';
+import { CreateMovieDto, DeleteMovieDto, ShowMovieInfoDto, ActorNameDto, SortMoviesByValue } from './movie.dto';
 import { MovieService } from './movie.service';
 
 @Controller('movies')
@@ -22,8 +22,8 @@ export class MovieController {
   }  
   // show sorted list
   @Get('/showSorted')
-  show() {
-    return this.usersService.sortMoviesByAlphabet();
+  show(@Body() movieDto: SortMoviesByValue) {
+    return this.usersService.sortMoviesByValue(movieDto);
   }
 
   // find where actors[n] = req.body
