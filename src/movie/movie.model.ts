@@ -25,6 +25,10 @@ export class Movie extends Model<MovieCreationAttrs> {
       
   @Column({
     type:DataType.NUMBER,
+    validate: {
+      max: 2022,
+      min: 1895,
+    }
   })
   year: number; 
 

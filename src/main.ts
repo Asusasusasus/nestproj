@@ -3,6 +3,6 @@ import { AppModule } from './app.module.';
 
 async function start() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(process.env.PORT, () => console.log('all good'));
+  await app.listen(process.env.PORT, () => console.log('all ok'));
 }
 start();
